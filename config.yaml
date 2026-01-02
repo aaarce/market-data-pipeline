@@ -1,0 +1,20 @@
+provider: coingecko
+vs_currency: usd
+days: 90
+interval: daily
+assets:
+  - bitcoin
+  - ethereum
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  sqlite_path: db/market.db
+
+features:
+  ma_windows: [7, 30]
+  vol_windows: [7, 30]
+
+viz:
+  asset: bitcoin
+  out_png: results/figures/price_ma.png

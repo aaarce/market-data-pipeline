@@ -12,7 +12,11 @@ venv/
 data/raw/
 data/processed/
 db/*.db
-#results/figures/
+
+results/**
+!results/figures/
+!results/figures/*.png
+
 
 # Jupyter
 .ipynb_checkpoints/

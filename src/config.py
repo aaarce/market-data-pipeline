@@ -18,6 +18,7 @@ class Features:
 class Viz:
     asset: str
     out_png: str
+    out_drawdown_png: str = "results/figures/drawdown.png"    
 
 @dataclass
 class AppConfig:
@@ -33,6 +34,9 @@ class AppConfig:
 def load_config(path: str | Path) -> AppConfig:
     with open(path, "r", encoding="utf-8") as f:
         c = yaml.safe_load(f)
+
+    viz_cfg = c.get("viz", {})  # may be missing entirely
+
     return AppConfig(
         provider=c["provider"],
         vs_currency=c["vs_currency"],
@@ -41,5 +45,9 @@ def load_config(path: str | Path) -> AppConfig:
         assets=list(c["assets"]),
         paths=Paths(**c["paths"]),
         features=Features(**c["features"]),
-        viz=Viz(**c.get("viz", {"asset": c["assets"][0], "out_png": "results/figures/price_ma.png"})),
+        viz=Viz(
+            asset=viz_cfg.get("asset", c["assets"][0]),
+            out_png=viz_cfg.get("out_png", "results/figures/price_ma.png"),
+            out_drawdown_png=viz_cfg.get("out_drawdown_png", "results/figures/drawdown.png"),
+        ),
     )

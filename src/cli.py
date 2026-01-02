@@ -1,6 +1,7 @@
 from __future__ import annotations
 import argparse, logging
 import pandas as pd
+import datetime as dt
 
 from .config import load_config
 from .fetch import fetch_coingecko_market_chart
@@ -36,6 +37,9 @@ def main() -> None:
 
     base = pd.concat(frames, ignore_index=True)
     feat = add_features(base, cfg.features.ma_windows, cfg.features.vol_windows)
+    
+    # Add run metadata (pipeline-friendly)
+    feat["run_ts_utc"] = dt.datetime.utcnow().isoformat()
 
     csv_path = save_csv(feat, cfg.paths.processed_dir, "market_features.csv")
     upsert_sqlite(feat, cfg.paths.sqlite_path)

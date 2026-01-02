@@ -13,3 +13,11 @@ python -m src.viz --config config.yaml
 - CSV: `data/processed/market_features.csv`
 - SQLite: `db/market.db` (table: `market_features`)
 - Figure: `results/figures/price_ma.png`
+
+## Sample Output
+
+**Price + Moving Averages**
+![Price + MA](results/figures/price_ma.png)
+
+**Drawdown**
+![Drawdown](results/figures/drawdown.png)

@@ -18,3 +18,4 @@ features:
 viz:
   asset: bitcoin
   out_png: results/figures/price_ma.png
+  out_drawdown_png: results/figures/drawdown.png

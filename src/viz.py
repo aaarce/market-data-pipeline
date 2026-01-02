@@ -44,6 +44,20 @@ def main() -> None:
     plt.tight_layout()
     plt.savefig(out_png, dpi=150)
     print(f"Saved: {out_png}")
+    
+        # --- Drawdown plot ---
+    out_dd = Path(cfg.viz.out_drawdown_png)
+    ensure_dir(out_dd.parent)
+
+    plt.figure(figsize=(8,4))
+    plt.plot(df["date"], df["drawdown"], label="drawdown")
+    plt.title(f"{cfg.viz.asset} — Drawdown")
+    plt.xlabel("date")
+    plt.ylabel("drawdown")
+    plt.axhline(0, linewidth=1)
+    plt.tight_layout()
+    plt.savefig(out_dd, dpi=150)
+    print(f"Saved: {out_dd}")
 
 if __name__ == "__main__":
     main()
